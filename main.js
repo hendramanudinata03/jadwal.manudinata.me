@@ -27,10 +27,10 @@ const namaHari = ["Ahad", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"]
 const indexHari = new Date().getDay();
 
 // Inisialisasi #tempatRingkasanJadwal
-tempatRingkasanJadwal = document.getElementById("tempatRingkasanJadwal");
+var tempatRingkasanJadwal = document.getElementById("tempatRingkasanJadwal");
 
 // Hari Ini
-hariIniRingkasanJadwal = document.createElement("p");
+var hariIniRingkasanJadwal = document.createElement("p");
 hariIniRingkasanJadwal.style.fontWeight = "bold";
 hariIniRingkasanJadwal.textContent = "Jadwal hari ini: " + jadwalJSON[indexHari - 1].jadwal.join(", ");
 
@@ -43,3 +43,24 @@ tempatRingkasanJadwal.appendChild(hariIniRingkasanJadwal);
 tempatRingkasanJadwal.appendChild(besokRingkasanJadwal);
 
 // -------------------------------------------------------------- //
+
+// Inisialisasi #badanTabel
+var badanTabel = document.getElementById("badanTabel");
+
+jadwalJSON.forEach(function fungsiJSON(item, index, arr) {
+  var rowJadwal = document.createElement("tr");
+
+  // Hari
+  var dataHariJadwal = document.createElement("td");
+  dataHariJadwal.innerHTML = arr[index].hari;
+  rowJadwal.appendChild(dataHariJadwal);
+  badanTabel.appendChild(rowJadwal);
+
+  //   Jadwal
+  for (var i = 0; i < 3; i++) {
+    var semuaJadwal = document.createElement("td");
+    semuaJadwal.innerHTML = arr[index].jadwal[i];
+    rowJadwal.appendChild(semuaJadwal);
+  }
+  badanTabel.appendChild(rowJadwal);
+});
