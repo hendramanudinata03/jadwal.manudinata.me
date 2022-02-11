@@ -1,6 +1,10 @@
 // Jadwal
 const jadwalJSON = [
   {
+    hari: "Ahad",
+    jadwal: "libur",
+  },
+  {
     hari: "Senin",
     jadwal: ["Matematika", "BK", "Bahasa Bali"],
   },
@@ -20,6 +24,10 @@ const jadwalJSON = [
     hari: "Jum'at",
     jadwal: ["Penjaskes", "Bahasa Indonesia", "Bacaan Shalat & Shalat Jum'at"],
   },
+  {
+    hari: "Sabtu",
+    jadwal: "libur",
+  },
 ];
 
 // Nama dan index hari
@@ -32,14 +40,31 @@ var tempatRingkasanJadwal = document.getElementById("tempatRingkasanJadwal");
 // Hari Ini
 var hariIniRingkasanJadwal = document.createElement("p");
 hariIniRingkasanJadwal.style.fontWeight = "bold";
-hariIniRingkasanJadwal.textContent = "Jadwal hari ini: " + jadwalJSON[indexHari - 1].jadwal.join(", ");
+if (jadwalJSON[indexHari].jadwal == "libur") {
+  hariIniRingkasanJadwal.textContent = "Hari ini libur, tidak ada pelajaran!";
+} else {
+  hariIniRingkasanJadwal.textContent = "Jadwal hari ini: " + jadwalJSON[indexHari].jadwal.join(", ");
+}
 
 // Besok
 besokRingkasanJadwal = document.createElement("p");
-besokRingkasanJadwal.textContent = "Jadwal besok: " + jadwalJSON[indexHari].jadwal.join(", ");
+if (indexHari + 1 == 6) {
+  besokLiburRingkasanJadwal = document.createElement("p");
+  besokLiburRingkasanJadwal.style.fontStyle = "italic";
+  besokLiburRingkasanJadwal.textContent = "Besok dan Ahad libur, tidak ada pelajaran!";
+
+  besokRingkasanJadwal.textContent = "Jadwal minggu depan: " + jadwalJSON[1].jadwal.join(", ");
+} else {
+  besokRingkasanJadwal.textContent = "Jadwal besok: " + jadwalJSON[indexHari].jadwal.join(", ");
+}
 
 // Append hari ini + besok
 tempatRingkasanJadwal.appendChild(hariIniRingkasanJadwal);
+
+if (indexHari + 1 == 6) {
+  tempatRingkasanJadwal.appendChild(besokLiburRingkasanJadwal);
+}
+
 tempatRingkasanJadwal.appendChild(besokRingkasanJadwal);
 
 // -------------------------------------------------------------- //
@@ -48,19 +73,21 @@ tempatRingkasanJadwal.appendChild(besokRingkasanJadwal);
 var badanTabel = document.getElementById("badanTabel");
 
 jadwalJSON.forEach(function fungsiJSON(item, index, arr) {
-  var rowJadwal = document.createElement("tr");
+  if (index != 0 && index != 6) {
+    var rowJadwal = document.createElement("tr");
 
-  // Hari
-  var dataHariJadwal = document.createElement("td");
-  dataHariJadwal.innerHTML = arr[index].hari;
-  rowJadwal.appendChild(dataHariJadwal);
-  badanTabel.appendChild(rowJadwal);
+    // Hari
+    var dataHariJadwal = document.createElement("td");
+    dataHariJadwal.innerHTML = arr[index].hari;
+    rowJadwal.appendChild(dataHariJadwal);
+    badanTabel.appendChild(rowJadwal);
 
-  //   Jadwal
-  for (var i = 0; i < 3; i++) {
-    var semuaJadwal = document.createElement("td");
-    semuaJadwal.innerHTML = arr[index].jadwal[i];
-    rowJadwal.appendChild(semuaJadwal);
+    //   Jadwal
+    for (var i = 0; i < 3; i++) {
+      var semuaJadwal = document.createElement("td");
+      semuaJadwal.innerHTML = arr[index].jadwal[i];
+      rowJadwal.appendChild(semuaJadwal);
+    }
+    badanTabel.appendChild(rowJadwal);
   }
-  badanTabel.appendChild(rowJadwal);
 });
