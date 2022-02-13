@@ -48,24 +48,24 @@ if (jadwalJSON[indexHari].jadwal == "libur") {
 
 // Besok
 besokRingkasanJadwal = document.createElement("p");
-if (indexHari + 1 == 6) {
+if (indexHari + 1 == 6 || indexHari + 1 == 7) {
   besokLiburRingkasanJadwal = document.createElement("p");
   besokLiburRingkasanJadwal.style.fontStyle = "italic";
-  besokLiburRingkasanJadwal.textContent = "Besok dan Ahad libur, tidak ada pelajaran!";
+  besokLiburRingkasanJadwal.textContent = "Besok libur, tidak ada pelajaran!";
 
   besokRingkasanJadwal.textContent = "Jadwal minggu depan: " + jadwalJSON[1].jadwal.join(", ");
 } else {
-  besokRingkasanJadwal.textContent = "Jadwal besok: " + jadwalJSON[indexHari].jadwal.join(", ");
+  besokRingkasanJadwal.textContent = "Jadwal besok: " + jadwalJSON[indexHari + 1].jadwal.join(", ");
 }
 
 // Append hari ini + besok
 tempatRingkasanJadwal.appendChild(hariIniRingkasanJadwal);
 
-if (indexHari + 1 == 6) {
+if (indexHari + 1 == 6 || indexHari + 1 == 7) {
   tempatRingkasanJadwal.appendChild(besokLiburRingkasanJadwal);
+} else {
+  tempatRingkasanJadwal.appendChild(besokRingkasanJadwal);
 }
-
-tempatRingkasanJadwal.appendChild(besokRingkasanJadwal);
 
 // -------------------------------------------------------------- //
 
