@@ -24,8 +24,24 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <h1>Jadwal Pelajaran Kelas 9A</h1>
+            <h1>Jadwal Pelajaran Kelas 9</h1>
             <p class="lead">Tahun Ajaran 2021-2022 (Semester 2)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="pilihanKelas">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <select id="ddPilihanKelas" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" onchange="saatBerubah()">
+              <option value="0" selected>Kelas 9A</option>
+              <option value="1">Kelas 9B</option>
+              <option value="2">Kelas 9C</option>
+              <option value="3">Kelas 9D</option>
+              <option value="4">Kelas 9E</option>
+              <option value="5">Kelas 9F</option>
+            </select>
           </div>
         </div>
       </div>
@@ -53,6 +69,7 @@
                     <th scope="col">Jadwal Pertama</th>
                     <th scope="col">Jadwal Kedua</th>
                     <th scope="col">Jadwal Ketiga</th>
+                    <th scope="col">Jadwal Keempat</th>
                   </tr>
                 </thead>
                 <tbody id="badanTabel">
